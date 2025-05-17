@@ -1,13 +1,24 @@
 <?php
 
 use App\Controllers\AuthController;
+use App\Controllers\ClientController;
+use App\Controllers\ArtistController;
 use App\Controllers\HomeController;
 use Core\Router\Route;
 
-// HomePage
-Route::get('/', [HomeController::class, 'index'])->name('root');
 
-// Authentication
-Route::get('/login', [AuthController::class, 'formLogin'])->name('users.login');
+Route::get('/', [AuthController::class, 'checkLogin'])->name('auth.check');
+Route::get('/login', [AuthController::class, 'new'])->name('users.login');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('users.authenticate');
-Route::get('/login', [AuthController::class, 'destroy'])->name('users.logout');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/logout', [AuthController::class, 'destroy'])->name('users.logout');
+
+    Route::middleware('client')->group(function () {
+        Route::get('/client', [ClientController::class, 'index'])->name('client.index');
+    });
+
+    Route::middleware('artist')->group(function () {
+        Route::get('artist', [ArtistController::class, 'index'])->name('artist.index');
+    });
+});

@@ -13,9 +13,9 @@ class UserPopulate
   {
 
     $user1 = new User([
-      'name' => 'Alice Artist',
-      'email' => 'aliceArtist@email.com',
-      'password' => 'password123',
+      'name' => 'Artist',
+      'email' => 'artist@email.com',
+      'password' => '12345',
       'type' => 'artist',
       'avatar_url' => null
     ]);
@@ -52,9 +52,9 @@ class UserPopulate
 
 
     $clientUser = new User([
-      'name' => 'Client Name',
+      'name' => 'Client',
       'email' => 'client@email.com',
-      'password' => 'password123',
+      'password' => '12345',
       'type' => 'client',
       'avatar_url' => null
     ]);

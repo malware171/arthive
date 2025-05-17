@@ -10,7 +10,9 @@
 
 <body class="min-h-screen bg-gradient-to-br from-gray-900 to-indigo-900 flex items-center justify-center">
     <div class="bg-white rounded-lg shadow-lg w-[1100px] h-[700px] flex overflow-hidden ">
-
+        <div class="absolute top-4 left-1/2 transform -translate-x-1/2 z-50 w-full px-6">
+            <?php require '_flash_message.phtml'; ?>
+        </div>
         <div class="w-1/2 relative bg-gray-100">
             <img src="https://images.squarespace-cdn.com/content/v1/5c544078d86cc9657dd6d2c3/87bf806c-ae2f-43dd-9741-ee53e9933dac/20240401-pikat_web.png" alt="Login Illustration" class="object-cover w-full h-full" />
             <div class="absolute top-8 left-6">
@@ -29,7 +31,7 @@
             </div>
 
             <?php require $view ?>
-            
+
             <p class="text-xs text-center mt-4">
                 Don’t have an account?
                 <a href="#" class="text-blue-600 font-semibold">Create an account</a>

@@ -40,7 +40,7 @@ class Artist extends Model
 
         foreach ($clients as $client) {
             if ($client->user_id == $this->user_id) {
-                $this->addError('user_id', 'user already associated with a client');
+                $this->addError('user_id', 'User already associated with a client');
                 return;
             }
         }
