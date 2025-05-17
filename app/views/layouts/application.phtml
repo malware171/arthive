@@ -10,6 +10,7 @@
 </head>
 
 <body>
+
     <main class="container-fluid">
 
         <?php require '_flash_message.phtml'; ?>
@@ -18,6 +19,14 @@
             <h1 class="text-2xl font-bold">
                 <?= $title ?>
             </h1>
+            <nav>
+                <form action="<?= route('users.logout') ?>" method="POST" class="inline">
+                    <button type="submit"
+                        class="text-white bg-blue-900 hover:bg-blue-700 w-[150] m-10 font-semibold border px-3 py-1 rounded">
+                        Logout
+                    </button>
+                </form>
+            </nav>
         </header>
 
         <?php require $view ?>

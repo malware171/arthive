@@ -12,7 +12,7 @@ Route::get('/login', [AuthController::class, 'new'])->name('users.login');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('users.authenticate');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/logout', [AuthController::class, 'destroy'])->name('users.logout');
+    Route::post('/logout', [AuthController::class, 'destroy'])->name('users.logout');
 
     Route::middleware('client')->group(function () {
         Route::get('/client', [ClientController::class, 'index'])->name('client.index');

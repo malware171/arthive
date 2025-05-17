@@ -15,6 +15,12 @@ class ArtistAuthenticate implements Middleware
             FlashMessage::danger('You must be logged in to access this page.');
             $this->redirectTo(route('users.login'));
         }
+
+        $user = Auth::user();
+        if ($user->isClient()) {
+            FlashMessage::danger('You do not have permission to access the page as an artist');
+            $this->redirectTo(route('client.index'));
+        }
     }
 
     private function redirectTo(string $location): void
