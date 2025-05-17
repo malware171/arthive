@@ -5,85 +5,69 @@ namespace Database\Populate;
 use App\Models\User;
 use App\Models\Artist;
 use App\Models\Client;
-use Core\Database\Database;
 
 class UserPopulate
 {
   public static function populate(): void
   {
+    self::createArtist('Artist', 'artist@email.com', '12345', "Artist bio");
 
-    $user1 = new User([
-      'name' => 'Artist',
-      'email' => 'artist@email.com',
-      'password' => '12345',
-      'type' => 'artist',
-      'avatar_url' => null
-    ]);
-    $user1->save();
-
-    $artist1 = new Artist([
-      'bio' => "Alice's bio",
-      'portfolio_url' => '',
-      'ai_detection_count' => 0,
-      'user_id' => $user1->id
-    ]);
-    $artist1->save();
-
-    $numberOfUsers = 2;
+    $numberOfUsers = 3;
 
     for ($i = 0; $i < $numberOfUsers; $i++) {
-      $artistUser = new User([
-        'name' => 'Artist ' . $i . 'Name',
-        'email' => 'artist' . $i . '@email.com',
-        'password' => 'password123',
-        'type' => 'artist',
-        'avatar_url' => null
-      ]);
-      $artistUser->save();
-
-      $artist = new Artist([
-        'bio' => "Artist's bio " . $i,
-        'portfolio_url' => '',
-        'ai_detection_count' => 0,
-        'user_id' => $artistUser->id
-      ]);
-      $artist->save();
+      self::createArtist(
+        'Artist ' . $i . ' Name',
+        'artist' . $i . '@email.com',
+        'password123',
+        "Artist's bio " . $i
+      );
     }
 
-
-    $clientUser = new User([
-      'name' => 'Client',
-      'email' => 'client@email.com',
-      'password' => '12345',
-      'type' => 'client',
-      'avatar_url' => null
-    ]);
-    $clientUser->save();
-
-    $client = new Client([
-      'phone' => '11999999999',
-      'user_id' => $clientUser->id
-    ]);
-    $client->save();
-
+    self::createClient('Client', 'client@email.com', '12345', '11999999999');
 
     for ($j = 0; $j < $numberOfUsers; $j++) {
-      $user = new User([
-        'name' => 'Client ' . $j . ' Name',
-        'email' => 'client' . $j . '@email.com',
-        'password' => 'password123',
-        'type' => 'client',
-        'avatar_url' => null
-      ]);
-      $user->save();
-
-      $client = new Client([
-        'phone' => '11999999999' . $j,
-        'user_id' => $user->id
-      ]);
-      $client->save();
+      self::createClient(
+        'Client ' . $j . ' Name',
+        'client' . $j . '@email.com',
+        'password123',
+        '11999999999' . $j
+      );
     }
+  }
 
-    echo "Artists and Clients successfuly populated.\n";
+  private static function createArtist(string $name, string $email, string $password, string $bio): void
+  {
+    $user = new User();
+    $user->name = $name;
+    $user->email = $email;
+    $user->password = $password;
+    $user->type = 'artist';
+    $user->avatar_url = null;
+    $user->save();
+
+    $artist = new Artist([
+      'bio' => $bio,
+      'portfolio_url' => '',
+      'ai_detection_count' => 0,
+      'user_id' => $user->id
+    ]);
+    $artist->save();
+  }
+
+  private static function createClient(string $name, string $email, string $password, string $phone): void
+  {
+    $user = new User();
+    $user->name = $name;
+    $user->email = $email;
+    $user->password = $password;
+    $user->type = 'client';
+    $user->avatar_url = null;
+    $user->save();
+
+    $client = new Client([
+      'phone' => $phone,
+      'user_id' => $user->id
+    ]);
+    $client->save();
   }
 }
