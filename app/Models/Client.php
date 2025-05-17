@@ -3,7 +3,56 @@
 namespace App\Models;
 
 use lib\Validations;
+use Core\Database\ActiveRecord\BelongsTo;
 use Core\Database\ActiveRecord\Model;
 
+/**
+ * @property INT $id
+ * @property VARCHAR $phone
+ * @property INT $user_id
+ */
 
-class Client extends Model {}
+class Client extends Model
+{
+    protected static string $table = 'clients';
+    protected static array $columns = [
+        'phone',
+        'user_id'
+    ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function validates(): void
+    {
+        if ($this->user_id == 0) {
+            $this->addError('user_id', 'cannot be null');
+            return;
+        }
+
+        $clients = Client::all();
+
+        foreach ($clients as $client) {
+            if ($client->user_id === $this->user_id) {
+                $this->addError('user_id', 'User already associated with a client');
+                return;
+            }
+        }
+    }
+
+    public function addError(string $attribute, string $message): void
+    {
+        $this->errors[] = "{$attribute} {$message}";
+    }
+
+    /**
+     * @return string[] List of error messages, each as a string
+     */
+
+    public function getErrors(): array
+    {
+        return $this->errors;
+    }
+}
