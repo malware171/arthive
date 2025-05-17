@@ -19,6 +19,6 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('artist')->group(function () {
-        Route::get('artist', [ArtistController::class, 'index'])->name('artist.index');
+        Route::get('/artist', [ArtistController::class, 'index'])->name('artist.index');
     });
 });
