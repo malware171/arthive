@@ -8,9 +8,9 @@ use Lib\Authentication\Auth;
 
 class ArtistController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): void
     {
         $title = 'Página inicial de Artistas';
-        $this->render('artist/index', compact('title'), 'application');
+        $this->render('artist/index', compact('title'));
     }
 }

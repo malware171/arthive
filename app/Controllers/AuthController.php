@@ -15,7 +15,7 @@ class AuthController extends Controller
     public function new(): void
     {
         $title = 'Login';
-        $this->render('authentications/formLogin', compact('title'), 'login');
+        $this->render('authentications/formLogin', compact('title'));
     }
 
     public function authenticate(Request $request): void
@@ -39,7 +39,7 @@ class AuthController extends Controller
             Auth::login($user);
             FlashMessage::success('Login successful');
 
-           //verificadno tipo de usuário
+            //verificadno tipo de usuário
             if ($user->isClient()) {
                 $this->redirectTo(route('client.index'));
             } else {

@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use lib\Validations;
+use Lib\Validations;
 use Core\Database\ActiveRecord\BelongsTo;
 use Core\Database\ActiveRecord\Model;
 
 /**
- * @property INT $id
- * @property VARCHAR $phone
- * @property INT $user_id
+ * @property int $id
+ * @property string $phone
+ * @property int $user_id
  */
 
 class Client extends Model
