@@ -32,11 +32,11 @@ class Client extends Model
             return;
         }
 
-        $clients = Client::all();
+        $artist = Artist::all();
 
-        foreach ($clients as $client) {
-            if ($client->user_id === $this->user_id) {
-                $this->addError('user_id', 'User already associated with a client');
+        foreach ($artist as $artist) {
+            if ($artist->user_id === $this->user_id) {
+                $this->addError('user_id', 'User already associated with a artist');
                 return;
             }
         }
