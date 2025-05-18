@@ -6,7 +6,6 @@ use App\Controllers\ArtistController;
 use App\Controllers\HomeController;
 use Core\Router\Route;
 
-
 Route::get('/', [AuthController::class, 'checkLogin'])->name('auth.check');
 Route::get('/login', [AuthController::class, 'new'])->name('users.login');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('users.authenticate');
