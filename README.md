@@ -1,6 +1,6 @@
 ## ArtHive
 
-"".
+"ArtHive é uma plataforma web desenvolvida para oferecer aos artistas um espaço organizado, seguro e livre de algoritmos para expor seus trabalhos. Com foco em portfolios visuais, a ferramenta permite categorizar obras, definir preços e apresentar com clareza o que cada artista oferece".
 
 ### Dependências
 
