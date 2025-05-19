@@ -1,0 +1,37 @@
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArtHive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="/assets/css/application.css">
+</head>
+
+<body>
+
+    <main class="container-fluid">
+
+        <?php require '_flash_message.phtml'; ?>
+
+        <header class="mb-3 flex items-center justify-between border-b pb-2">
+            <h1 class="text-2xl font-bold">
+                <?= $title ?>
+            </h1>
+            <nav>
+                <form action="<?= route('users.logout') ?>" method="POST" class="inline">
+                    <button type="submit"
+                        class="text-white bg-blue-900 hover:bg-blue-700 w-[150] m-10 font-semibold border px-3 py-1 rounded">
+                        Logout
+                    </button>
+                </form>
+            </nav>
+        </header>
+
+        <?php require $view ?>
+
+    </main>
+</body>
+
+</html>
