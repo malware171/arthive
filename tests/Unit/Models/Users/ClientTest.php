@@ -7,6 +7,7 @@ use App\Models\User;
 use Tests\TestCase;
 
 use function PHPUnit\Framework\assertEquals;
+use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\equalTo;
 
 class ClientTest extends TestCase{
@@ -68,30 +69,15 @@ class ClientTest extends TestCase{
       $this->assertEquals(0 || null, $client->validates());
    }
 
-   public function test_should_associate_client_to_user(): void {
-      $user = new User([
-         'name' => 'User_client',
-         'email' => 'userTeste@example.com',
-         'password' => '123456',
-         'password_confirmation' => '123456'
-      ]);
-      $user->save();
-
-      
-      $client = $user->belongsTo('42998247591', $user->id);
-      assertEquals($client ,$user->belongsTo('42998247591', $user->id));
-      
+   public function test_client_associated_as_user(): void 
+   {
+      $this->assertEquals($this->user_client->id, $this->client->user()->get()->id);   
    }
 /* 
    public function test_destroy_should_remove_client(): void 
    {
       $this->client->destroy();
       $this->assertCount(0, Client::all());
-   }
-
-   public function test_client_associated_as_user(): void 
-   {
-      $this->assertEquals($this->user1->id, $this->client->user()->get()->id);
    }
 */
   
