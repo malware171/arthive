@@ -39,11 +39,17 @@ class Artist extends Model
         $clients = Client::all();
 
         foreach ($clients as $client) {
-            if ($client->user_id == $this->user_id) {
+            if ($client->user_id === $this->user_id) {
                 $this->addError('user_id', 'User already associated with a client');
                 return;
             }
         }
+    }
+
+    public function isValid(): bool
+    {
+        $this->validates();
+        return empty($this->errors);
     }
 
     public function addError(string $attribute, string $message): void
