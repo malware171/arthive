@@ -73,12 +73,4 @@ class ClientTest extends TestCase{
    {
       $this->assertEquals($this->user_client->id, $this->client->user()->get()->id);   
    }
-/* 
-   public function test_destroy_should_remove_client(): void 
-   {
-      $this->client->destroy();
-      $this->assertCount(0, Client::all());
-   }
-*/
-  
 }
