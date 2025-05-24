@@ -14,6 +14,16 @@ class AuthController extends Controller
 
     public function new(): void
     {
+        if (Auth::check()) {
+            $user = Auth::user();
+
+            if ($user->isClient()) {
+                $this->redirectTo(route('client.index'));
+            } else {
+                $this->redirectTo(route('artist.index'));
+            }
+        }
+
         $title = 'Login';
         $this->render('authentications/formLogin', compact('title'));
     }
