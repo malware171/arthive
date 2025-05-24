@@ -6,6 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+        extend: {
+            fontFamily: {
+            'inknut': ['"Inknut Antiqua"', 'serif'],
+            }
+        }
+        }
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@700&display=swap" rel="stylesheet">
 </head>
 
 <body class="h-screen bg-gray-900 flex items-center justify-center m-0 p-0 overflow-hidden">
@@ -20,10 +34,10 @@
                 class="h-full w-full object-cover rounded-2xl" />
         </div>
 
-        <div class="w-1/2 p-8 flex flex-col justify-center bg-gray-200">
-            <div class="mb-6 ">
-                <h2 class="text-xl font-bold text-indigo-900">LogIn</h2>
-                <p class="text-sm text-indigo-900 font-semibold">Welcome Back</p>
+        <div class="w-1/2 p-8 flex flex-col items-center justify-center bg-gray-200">
+            <div class="mb-6 flex flex-col justify-center items-center">
+                <h2 class="text-3xl font-bold text-indigo-900 font-inknut">LogIn</h2>
+                <p class="text-sm text-indigo-900 font-semibold font-inknut">Welcome Back</p>
             </div>
 
             <?php require $view ?>
