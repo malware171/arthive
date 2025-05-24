@@ -8,24 +8,20 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="min-h-screen bg-gradient-to-br from-gray-900 to-indigo-900 flex items-center justify-center">
-    <div class="bg-white rounded-lg shadow-lg w-[1100px] h-[700px] flex overflow-hidden ">
+<body class="h-screen bg-gray-900 flex items-center justify-center m-0 p-0 overflow-hidden">
+    <div class="bg-transparent rounded-2xl shadow-xl w-[1100px] h-[700px] flex overflow-hidden">
         <div class="absolute top-4 left-1/2 transform -translate-x-1/2 z-50 w-full px-6">
             <?php require '_flash_message.phtml'; ?>
         </div>
-        <div class="w-1/2 relative bg-gray-100">
-            <img src="https://images.squarespace-cdn.com/content/v1/5c544078d86cc9657dd6d2c3/87bf806c-ae2f-43dd-9741-ee53e9933dac/20240401-pikat_web.png" alt="Login Illustration" class="object-cover w-full h-full" />
-            <div class="absolute top-8 left-6">
-                <h2 class="text-xl font-semibold text-indigo-900">Welcome to ArtHive</h2>
-            </div>
-            <div class="absolute bottom-4 left-6">
-                <p class="text-sm text-gray-700">Art by Pikat</p>
-            </div>
+
+        <div class="hidden md:block w-1/2 bg-gray-200">
+            <img src="assets/images/loginImage.png" 
+                alt="login image" 
+                class="h-full w-full object-cover rounded-2xl" />
         </div>
 
-
         <div class="w-1/2 p-8 flex flex-col justify-center bg-gray-200">
-            <div class="mb-6">
+            <div class="mb-6 ">
                 <h2 class="text-xl font-bold text-indigo-900">LogIn</h2>
                 <p class="text-sm text-indigo-900 font-semibold">Welcome Back</p>
             </div>
