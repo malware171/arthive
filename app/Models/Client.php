@@ -42,6 +42,13 @@ class Client extends Model
         }
     }
 
+    public function isValid(): bool
+    {
+        $this->validates();
+
+        return empty($this->errors);
+    }
+
     public function addError(string $attribute, string $message): void
     {
         $this->errors[] = "{$attribute} {$message}";
