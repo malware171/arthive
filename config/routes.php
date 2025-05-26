@@ -20,4 +20,8 @@ Route::middleware('auth')->group(function () {
     Route::middleware('artist')->group(function () {
         Route::get('/artist', [ArtistController::class, 'index'])->name('artist.index');
     });
+
+    Route::middleware('artist')->group(function () {
+        Route::post('/adminPage', [ArtistController::class, 'new'])->name('artist.new');
+    });
 });
