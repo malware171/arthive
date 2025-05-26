@@ -10,7 +10,14 @@ class ArtistController extends Controller
 {
     public function index(Request $request): void
     {
-        $title = 'Página inicial de Artistas';
-        $this->render('artist/index', compact('title'));
+        $title = 'Portifólio';
+        $subtitle = 'Visualize todos os seus projetos';
+        $this->render('adminPage/index', compact('title', 'subtitle'));
+    }
+    public function new(Request $request): void
+    {
+        $title = 'Nova Arte';
+        $subtitle = 'Descrição';
+        $this->render('adminPage/new', compact('title', 'subtitle'));
     }
 }
