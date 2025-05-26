@@ -30,4 +30,13 @@ CREATE TABLE clients (
 
 );
 
+CREATE TABLE artworks {
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR (45),
+  price DECIMAL (10, 2)
+  date DATE,
+  description TEXT()
+
+}
+
 SET foreign_key_checks = 1;

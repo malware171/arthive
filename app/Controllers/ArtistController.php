@@ -29,13 +29,11 @@ class ArtistController extends Controller
             !is_array($parms) ||
             !isset($parms['title'], $params['description'], $params['image'])
         ) {
-            FlashMessage::danger('All inputs need to preenchido');
+            FlashMessage::danger('All inputs need to filled');
             $this->redirectTo(route('artist.new'));
             return;
         }
         //  CHAMA O METODO DENTRO DO MODEL
         // PARA SALVAR A POSTAGEM
-
-
     }
 }
