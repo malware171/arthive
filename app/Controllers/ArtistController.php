@@ -21,13 +21,19 @@ class ArtistController extends Controller
         $description = 'Descrição';
         $this->render('adminPage/new', compact('title', 'description'));
     }
+
+    public function updateArtwork(): void
+    {
+        $image = $_FILES['image'];
+    }
+
     public function newArtwork(Request $request): void
     {
         $parms = $request->getParam('artwork');
 
         if(
             !is_array($parms) ||
-            !isset($parms['title'], $params['description'], $params['image'])
+            !isset($parms['title'], $params['description'], $_FILES['image'])
         ) {
             FlashMessage::danger('All inputs need to filled');
             $this->redirectTo(route('artist.new'));

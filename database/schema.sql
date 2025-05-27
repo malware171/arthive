@@ -15,6 +15,7 @@ CREATE TABLE users (
 
 CREATE TABLE artists (
   id INT AUTO_INCREMENT PRIMARY KEY,
+  user_name VARCHAR(100) NOT NULL
   bio TEXT,
   portfolio_url VARCHAR(255),
   ai_detection_count INT,
@@ -30,13 +31,24 @@ CREATE TABLE clients (
 
 );
 
-CREATE TABLE artworks {
+CREATE TABLE artworks (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  title VARCHAR (45),
+  title VARCHAR(150) NOT NULL,
   price DECIMAL (10, 2)
-  date DATE,
-  description TEXT()
+  creation_date DATE,
+  description TEXT,
+  image_url VARCHAR(255) NOT NULL,
+  is_ai_verified INT,
+  artist_id INT,
+  category_id INT,
+  FOREIGN KEY (artist_id) REFERENCES artists(id) ON DELETE CASCADE,
+  FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
 
-}
+);
+
+CREATE TABLE categories (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50) NOT NULL UNIQUE
+);
 
 SET foreign_key_checks = 1;
