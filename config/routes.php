@@ -27,6 +27,6 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('artist')->group(function () {
-        Route::post('/upload', [ArtworkController::class, 'newArtwork'])->name('artist.newArtwork');
+        Route::post('/createPost', [ArtworkController::class, 'newArtwork'])->name('artist.newArtwork');
     });
 });

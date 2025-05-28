@@ -7,8 +7,7 @@ use Core\Database\ActiveRecord\Model;
 
 /**
  * @property int $id
- * @property string $title 
- * @property float $price
+ * @property string $title
  * @property date $creation_date
  * @property string $description
  * @property string $image_url
@@ -19,26 +18,25 @@ use Core\Database\ActiveRecord\Model;
 
 class Artwork extends Model
 {
-   protected static string $table = 'artworks';
-   protected static array $columns = [
+    protected static string $table = 'artworks';
+    protected static array $columns = [
      'id',
      'title',
-     'price',
      'creation_date',
      'description',
      'image_url',
-     'is_ai_veried',
+     'is_ai_verified',
      'artist_id',
      'category_id',
-   ];
+    ];
 
-   public function refArtist(): BelongsTo
-   {
-      return $this->belongsTo(Artist::class, 'artist_id');
-   }
+    public function refArtist(): BelongsTo
+    {
+        return $this->belongsTo(Artist::class, 'artist_id');
+    }
 
-   public function redCategory(): BelongsTo
-   {
-      return $this->belongsTo(Category::class, 'category_id');
-   }
-}  
+    public function redCategory(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+}

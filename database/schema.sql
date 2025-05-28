@@ -35,7 +35,6 @@ CREATE TABLE clients (
 CREATE TABLE artworks (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(150) NOT NULL,
-  price DECIMAL (10, 2),
   creation_date DATE,
   description TEXT,
   image_url VARCHAR(255) NOT NULL,

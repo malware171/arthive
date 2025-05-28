@@ -6,12 +6,12 @@ use Core\Database\ActiveRecord\Model;
 
 /**
  * @property int $id
- * @property string $name 
+ * @property string $name
 */
 class Category extends Model
 {
-   protected static string $table = 'categories';
-   protected static array $columns = [
+    protected static string $table = 'categories';
+    protected static array $columns = [
       'name'
-   ];
+    ];
 }
