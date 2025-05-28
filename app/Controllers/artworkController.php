@@ -32,8 +32,6 @@ class ArtworkController extends Controller
          $this->redirectTo(route('artist.new'));
          return;
       }
-      //  CHAMA O METODO DENTRO DO MODEL
-      // PARA SALVAR A POSTAGEM
    }
 
 }
