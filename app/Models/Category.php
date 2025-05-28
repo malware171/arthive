@@ -10,7 +10,7 @@ use Core\Database\ActiveRecord\Model;
 */
 class Category extends Model
 {
-   protected static $table = 'categories';
+   protected static string $table = 'categories';
    protected static array $columns = [
       'name'
    ];

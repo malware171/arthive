@@ -19,7 +19,7 @@ use Core\Database\ActiveRecord\Model;
 
 class Artwork extends Model
 {
-   protected static $table = 'artworks';
+   protected static string $table = 'artworks';
    protected static array $columns = [
      'id',
      'title',
