@@ -18,11 +18,11 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('artist')->group(function () {
-        Route::get('/artist', [ArtistController::class, 'index'])->name('artist.index');
+        Route::get('/adminPage', [ArtistController::class, 'index'])->name('artist.index');
     });
 
     Route::middleware('artist')->group(function () {
-        Route::get('/adminPage', [ArtistController::class, 'new'])->name('artist.new');
+        Route::get('/createPost', [ArtistController::class, 'new'])->name('artist.new');
     });
 
     Route::middleware('artist')->group(function () {

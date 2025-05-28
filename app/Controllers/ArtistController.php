@@ -19,7 +19,7 @@ class ArtistController extends Controller
     {
         $title = 'Nova Arte';
         $description = 'Descrição';
-        $this->render('adminPage/new', compact('title', 'description'));
+        $this->render('adminPage/createPost/new', compact('title', 'description'));
     }
 
     public function updateArtwork(): void
