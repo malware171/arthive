@@ -3,6 +3,8 @@ SET foreign_key_checks = 0;
 DROP TABLE IF EXISTS artists;
 DROP TABLE IF EXISTS clients;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS artworks;
+DROP TABLE IF EXISTS categories;
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -15,7 +17,6 @@ CREATE TABLE users (
 
 CREATE TABLE artists (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  user_name VARCHAR(100) NOT NULL
   bio TEXT,
   portfolio_url VARCHAR(255),
   ai_detection_count INT,
@@ -34,7 +35,6 @@ CREATE TABLE clients (
 CREATE TABLE artworks (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(150) NOT NULL,
-  price DECIMAL (10, 2)
   creation_date DATE,
   description TEXT,
   image_url VARCHAR(255) NOT NULL,

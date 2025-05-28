@@ -1,5 +1,5 @@
 <div class="m-20">
-   <form action="/upload" class="space-y-4" method="POST">
+   <form action=<?= route('artist.newArtwork') ?> class="space-y-4" method="POST" enctype="multipart/form-data" >
       <div>
          <label for="artwork_title" class="text-2xl font-bold block mb-1">Titulo da arte</label>
          <input
@@ -29,9 +29,23 @@
       <div class="flex flex-col">
          <label for="artwork_image"
          >Selecione uma imagem:</label>
-         <input type="file" id="artwork_image" name="artwork[image]" accept="image/*" class="">
+         <input type="file" id="artwork_image" name="image" accept="image/*" class="">
       </div>
-
+      <label class="text-xl font-bold block mb-2">Categoria</label>
+      <div class="space-y-2">
+         <?php foreach ($categories as $category) : ?>
+            <div>
+               <input 
+                  type="radio" 
+                  id="category_<?= $category->id ?>" 
+                  name="artwork[category_id]" 
+                  value="<?= $category->id ?>"
+                  required
+               >
+               <label for="category_<?= $category->id ?>"><?= $category->name ?></label>
+            </div>
+         <?php endforeach ?>
+      </div>
       <button
          type="submit"
          class="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-md font-semibold transition">

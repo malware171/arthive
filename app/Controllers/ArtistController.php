@@ -15,5 +15,4 @@ class ArtistController extends Controller
         $subtitle = 'Visualize todos os seus projetos';
         $this->render('adminPage/index', compact('title', 'subtitle'));
     }
-    
 }
