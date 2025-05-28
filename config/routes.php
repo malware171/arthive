@@ -18,15 +18,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/client', [ClientController::class, 'index'])->name('client.index');
     });
 
-    Route::middleware('artist')->group(function () {
+    Route::middleware('artist')->group(function() {
         Route::get('/adminPage', [ArtistController::class, 'index'])->name('artist.index');
-    });
-
-    Route::middleware('artist')->group(function () {
         Route::get('/createPost', [ArtworkController::class, 'new'])->name('artist.new');
-    });
-
-    Route::middleware('artist')->group(function () {
         Route::post('/createPost', [ArtworkController::class, 'newArtwork'])->name('artist.newArtwork');
     });
 });
