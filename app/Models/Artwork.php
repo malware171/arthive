@@ -30,12 +30,12 @@ class Artwork extends Model
      'category_id',
     ];
 
-    public function refArtist(): BelongsTo
+    public function artist(): BelongsTo
     {
         return $this->belongsTo(Artist::class, 'artist_id');
     }
 
-    public function redCategory(): BelongsTo
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id');
     }

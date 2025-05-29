@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Lib\Validations;
 use Core\Database\ActiveRecord\BelongsTo;
+use Core\Database\ActiveRecord\HasMany;
 use Core\Database\ActiveRecord\Model;
 
 /**
@@ -65,4 +66,10 @@ class Artist extends Model
     {
         return $this->errors;
     }
+
+    public function artworks(): HasMany
+    {
+        return $this->hasMany(Artwork::class, 'artist_id');
+    }
+    
 }

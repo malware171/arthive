@@ -56,7 +56,7 @@ class ArtworkController extends Controller
             return;
         }
 
-        $imageUrl = '/uploads/artworks/' . $imageName;
+        $imageUrl = "/uploads/artworks/{$artist->id}/" . $imageName;
 
         $artwork = new Artwork([
          'title' => $params['title'],
