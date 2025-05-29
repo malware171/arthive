@@ -10,14 +10,5 @@ use Lib\FlashMessage;
 
 class ArtistController extends Controller
 {
-    public function index(Request $request): void
-    {
-        $artist = Auth::user();
-
-        $artworks = Artwork::where(['artist_id' => $artist->id ]);
-
-        $title = 'Portifólio';
-        $subtitle = 'Visualize todos os seus projetos';
-        $this->render('admin/artworks/index', compact('title', 'subtitle', 'artworks', 'artist'));
-    }
+    
 }

@@ -11,6 +11,16 @@ use Lib\FlashMessage;
 
 class ArtworkController extends Controller
 {
+    public function index(Request $request): void
+    {
+        $artist = Auth::user();
+
+        $artworks = Artwork::where(['artist_id' => $artist->id ]);
+
+        $title = 'Portifólio';
+        $subtitle = 'Visualize todos os seus projetos';
+        $this->render('admin/artworks/index', compact('title', 'subtitle', 'artworks', 'artist'));
+    }
     public function new(Request $request): void
     {
         $params = $request->getParams();
@@ -73,7 +83,7 @@ class ArtworkController extends Controller
             $this->redirectTo(route('artist.new'));
         } else {
             FlashMessage::success('Imagem salva com sucesso');
-            $this->redirectTo(route('artist.index'));
+            $this->redirectTo(route('artist.admin.page'));
         }
     }
     public function destroy(Request $request): void
@@ -92,6 +102,6 @@ class ArtworkController extends Controller
             FlashMessage::danger('Obra de Arte não foi encontrada');
         }
 
-        $this->redirectTo(route('artist.index'));
+        $this->redirectTo(route('artist.admin.page'));
     }
 }

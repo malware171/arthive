@@ -19,8 +19,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('artist')->group(function () {
-        //ARTIST ARTWORKS
-        Route::get('/admin/artworks', [ArtistController::class, 'index'])->name('artist.index');
+        //SHOW
+        Route::get('/admin/artworks', [ArtworkController::class, 'index'])->name('artist.admin.page');
 
         //CREATE
         Route::get('/admin/artworks/new', [ArtworkController::class, 'new'])->name('artist.new');
