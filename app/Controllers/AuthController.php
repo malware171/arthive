@@ -20,7 +20,7 @@ class AuthController extends Controller
             if ($user->isClient()) {
                 $this->redirectTo(route('client.index'));
             } else {
-                $this->redirectTo(route('artist.index'));
+                $this->redirectTo(route('artist.admin.page'));
             }
         }
 
@@ -53,7 +53,7 @@ class AuthController extends Controller
             if ($user->isClient()) {
                 $this->redirectTo(route('client.index'));
             } else {
-                $this->redirectTo(route('artist.index'));
+                $this->redirectTo(route('artist.admin.page'));
             }
         } else {
             FlashMessage::danger('Invalid username or password');
@@ -67,7 +67,7 @@ class AuthController extends Controller
 
         if ($user) {
             if ($user->isArtist()) {
-                $this->redirectTo(route('artist.index'));
+                $this->redirectTo(route('artist.admin.page'));
             } else {
                 $this->redirectTo(route('client.index'));
             }
