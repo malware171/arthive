@@ -71,5 +71,4 @@ class Artist extends Model
     {
         return $this->hasMany(Artwork::class, 'artist_id');
     }
-    
 }

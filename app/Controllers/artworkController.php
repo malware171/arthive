@@ -18,7 +18,7 @@ class ArtworkController extends Controller
 
         $title = 'Nova Arte';
         $description = 'Descrição';
-        $this->render('adminPage/createPost/new', compact('title', 'description', 'categories'));
+        $this->render('/admin/artworks/new', compact('title', 'description', 'categories'));
     }
 
     public function newArtwork(Request $request): void
@@ -75,5 +75,23 @@ class ArtworkController extends Controller
             FlashMessage::success('Imagem salva com sucesso');
             $this->redirectTo(route('artist.index'));
         }
+    }
+    public function destroy(Request $request): void
+    {
+        $params = $request->getParams();
+
+        $artwork = $this->current_user->artist()->artworks()->findById($params['id']);
+
+        if ($artwork) {
+            if ($artwork->destroy()) {
+                FlashMessage::success('Obra Excluida com sucesso');
+            } else {
+                FlashMessage::danger('Erro ao excluir a obra');
+            }
+        } else {
+            FlashMessage::danger('Obra de Arte não foi encontrada');
+        }
+
+        $this->redirectTo(route('artist.index'));
     }
 }

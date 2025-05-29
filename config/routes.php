@@ -18,9 +18,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/client', [ClientController::class, 'index'])->name('client.index');
     });
 
-    Route::middleware('artist')->group(function() {
-        Route::get('/adminPage', [ArtistController::class, 'index'])->name('artist.index');
-        Route::get('/createPost', [ArtworkController::class, 'new'])->name('artist.new');
-        Route::post('/createPost', [ArtworkController::class, 'newArtwork'])->name('artist.newArtwork');
+    Route::middleware('artist')->group(function () {
+        //ARTIST ARTWORKS
+        Route::get('/admin/artworks', [ArtistController::class, 'index'])->name('artist.index');
+
+        //CREATE
+        Route::get('/admin/artworks/new', [ArtworkController::class, 'new'])->name('artist.new');
+        Route::post('/admin/artworks/new', [ArtworkController::class, 'newArtwork'])->name('artist.newArtwork');
+
+        //DELETE
+        Route::delete('/admin/artworks/{id}', [ArtworkController::class, 'destroy'])->name('artwork.destroy');
     });
 });
