@@ -109,6 +109,7 @@ class ArtworkController extends Controller
     {
         $params = $request->getParams();
         $categories = Category::all();
+        
         $artwork = $this->current_user->artist()->artworks()->findById($params['id']);
 
         if($artwork) {
@@ -117,5 +118,64 @@ class ArtworkController extends Controller
             FlashMessage::danger('Arte não foi encontrada');
         }
         
+    }
+
+    // Em App\Controllers\ArtworkController.php
+
+    public function update(Request $request): void
+    {
+        $routeParams = $request->getParams();
+            
+        $artworkId = (int) $routeParams['id'];
+        
+        $params = $request->getParam('artwork');
+        $imgFile = $_FILES['image'] ?? null;
+
+        $artwork = $this->current_user->artist()->artworks()->findById($artworkId);
+
+        if (!$artwork) {
+            FlashMessage::danger('Arte não encontrada para atualização.');
+            $this->redirectTo(route('artist.admin.page')); 
+            return;
+        }
+        
+        if (empty($params['title']) || empty($params['description']) || empty($params['category_id'])) {
+            FlashMessage::danger('Título, descrição e categoria são obrigatórios.');
+            $this->redirectTo(route('artwork.edit', ['id' => $artworkId]));
+            return;
+        }
+        
+        $artist = Auth::user(); 
+        $imageUrl = $artwork->image_url; 
+
+        if ($imgFile && $imgFile['error'] === UPLOAD_ERR_OK) {
+            
+            $uploadDir =  __DIR__ . "/../../public/assets/uploads/artworks/{$artist->id}/";
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0775, true);
+            }
+            $imageName = uniqid() . '-' . basename($imgFile['name']);
+            $targetFile = $uploadDir . $imageName;
+
+            if (!move_uploaded_file($imgFile['tmp_name'], $targetFile)) {
+                FlashMessage::danger('Ocorreu um erro ao salvar a nova imagem.');
+                $this->redirectTo(route('artwork.edit', ['id' => $artworkId]));
+                return;
+            }
+            $imageUrl = "/uploads/artworks/{$artist->id}/" . $imageName;
+        }
+        
+        $artwork->title = $params['title'];
+        $artwork->description = $params['description'];
+        $artwork->image_url = $imageUrl; 
+        $artwork->category_id = $params['category_id'];
+
+        if (!$artwork->save()) {
+            FlashMessage::danger('Erro ao salvar as alterações.');
+            $this->redirectTo(route('artwork.edit', ['id' => $artworkId]));
+        } else {
+            FlashMessage::success('Obra atualizada com sucesso!');
+            $this->redirectTo(route('artist.admin.page'));
+        }
     }
 }
