@@ -104,4 +104,18 @@ class ArtworkController extends Controller
 
         $this->redirectTo(route('artist.admin.page'));
     }
+
+    public function edit(Request $request): void
+    {
+        $params = $request->getParams();
+        $categories = Category::all();
+        $artwork = $this->current_user->artist()->artworks()->findById($params['id']);
+
+        if($artwork) {
+            $this->render('/admin/artworks/edit', compact('artwork', 'categories'));
+        } else {
+            FlashMessage::danger('Arte não foi encontrada');
+        }
+        
+    }
 }
