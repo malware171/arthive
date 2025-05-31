@@ -18,7 +18,7 @@ class AuthController extends Controller
             $user = Auth::user();
 
             if ($user->isClient()) {
-                $this->redirectTo(route('client.index'));
+                $this->redirectTo(route('home.index'));
             } else {
                 $this->redirectTo(route('artist.admin.page'));
             }
@@ -51,7 +51,7 @@ class AuthController extends Controller
 
             //verificadno tipo de usuário
             if ($user->isClient()) {
-                $this->redirectTo(route('client.index'));
+                $this->redirectTo(route('home.index'));
             } else {
                 $this->redirectTo(route('artist.admin.page'));
             }
@@ -69,7 +69,7 @@ class AuthController extends Controller
             if ($user->isArtist()) {
                 $this->redirectTo(route('artist.admin.page'));
             } else {
-                $this->redirectTo(route('client.index'));
+                $this->redirectTo(route('home.index'));
             }
         } else {
             $this->redirectTo(route('users.login'));
