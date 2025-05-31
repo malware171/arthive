@@ -14,7 +14,7 @@ class ArtworkController extends Controller
     public function index(Request $request): void
     {
         $artist = Auth::user();
-        
+
         $artworks = Artwork::where(['artist_id' => $artist->id ]);
 
         $title = 'Portifólio';
@@ -109,15 +109,14 @@ class ArtworkController extends Controller
     {
         $params = $request->getParams();
         $categories = Category::all();
-        
+
         $artwork = $this->current_user->artist()->artworks()->findById($params['id']);
 
-        if($artwork) {
+        if ($artwork) {
             $this->render('/admin/artworks/edit', compact('artwork', 'categories'));
         } else {
             FlashMessage::danger('Arte não foi encontrada');
         }
-        
     }
 
     // Em App\Controllers\ArtworkController.php
@@ -125,9 +124,9 @@ class ArtworkController extends Controller
     public function update(Request $request): void
     {
         $routeParams = $request->getParams();
-            
+
         $artworkId = (int) $routeParams['id'];
-        
+
         $params = $request->getParam('artwork');
         $imgFile = $_FILES['image'] ?? null;
 
@@ -135,21 +134,20 @@ class ArtworkController extends Controller
 
         if (!$artwork) {
             FlashMessage::danger('Arte não encontrada para atualização.');
-            $this->redirectTo(route('artist.admin.page')); 
+            $this->redirectTo(route('artist.admin.page'));
             return;
         }
-        
+
         if (empty($params['title']) || empty($params['description']) || empty($params['category_id'])) {
             FlashMessage::danger('Título, descrição e categoria são obrigatórios.');
             $this->redirectTo(route('artwork.edit', ['id' => $artworkId]));
             return;
         }
-        
-        $artist = Auth::user(); 
-        $imageUrl = $artwork->image_url; 
+
+        $artist = Auth::user();
+        $imageUrl = $artwork->image_url;
 
         if ($imgFile && $imgFile['error'] === UPLOAD_ERR_OK) {
-            
             $uploadDir =  __DIR__ . "/../../public/assets/uploads/artworks/{$artist->id}/";
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0775, true);
@@ -164,10 +162,10 @@ class ArtworkController extends Controller
             }
             $imageUrl = "/uploads/artworks/{$artist->id}/" . $imageName;
         }
-        
+
         $artwork->title = $params['title'];
         $artwork->description = $params['description'];
-        $artwork->image_url = $imageUrl; 
+        $artwork->image_url = $imageUrl;
         $artwork->category_id = $params['category_id'];
 
         if (!$artwork->save()) {

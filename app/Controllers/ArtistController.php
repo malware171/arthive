@@ -10,5 +10,4 @@ use Lib\FlashMessage;
 
 class ArtistController extends Controller
 {
-    
 }
