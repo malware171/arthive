@@ -31,7 +31,7 @@ class ArtworkController extends Controller
         $this->render('/admin/artworks/new', compact('title', 'description', 'categories'));
     }
 
-    public function newArtwork(Request $request): void
+    public function create(Request $request): void
     {
         $params = $request->getParam('artwork');
         $imgFile = $_FILES['image'];
