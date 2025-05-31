@@ -14,7 +14,7 @@ class ArtworkController extends Controller
     public function index(Request $request): void
     {
         $artist = Auth::user();
-
+        
         $artworks = Artwork::where(['artist_id' => $artist->id ]);
 
         $title = 'Portifólio';
@@ -90,7 +90,7 @@ class ArtworkController extends Controller
     {
         $params = $request->getParams();
 
-        $artwork = $this->current_user->artist()->artworks()->findById($params['id']);
+        $artwork = Artwork::findById((int)$params['id']);
 
         if ($artwork) {
             if ($artwork->destroy()) {
