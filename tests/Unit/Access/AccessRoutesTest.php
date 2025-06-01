@@ -26,7 +26,7 @@ class AccessRoutesTest extends TestCase
     /* 2.1 Teste das rotas protegidas ou privadas */
     public function test_protected_routes_redirect_when_not_authenticated(): void
     {
-        $routes = ['/client', '/artist'];
+        $routes = ['/home', '/admin/artworks'];
 
         foreach ($routes as $route) {
             $response = $this->httpClient->get($route, [
@@ -83,6 +83,6 @@ class AccessRoutesTest extends TestCase
         ]);
 
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertEquals('/client', $response->getHeaderLine('Location'));
+        $this->assertEquals('/home', $response->getHeaderLine('Location'));
     }
 }
