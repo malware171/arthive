@@ -1,25 +1,27 @@
-<div class="ml-20 mr-20 mt-10">
-   <div>
-      <h1 class="text-3xl font-bold text-gray-900"><?=$title?></h1>
-   </div>
-   <div class="flex flex-wrap gap-10 mb-8">
-      <?php foreach($artworks as $artwork) : ?>
-         <div class="flex flex-col max-w-xs gap-3 mt-10">
-            <!-- DIV PARA ARTE -->
-            <div class="max-h-[300px] overflow-hidden rounded-2xl shadow-lg">
-               <img src="/assets<?=$artwork->image_url?>" alt="arte"
-                  class="object-cover rounded-2xl w-full h-full transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl"
-               />
-            </div>
-            <!-- DIV TITULOS DAS OBRAS -->
-            <div>
-               <h1 class="text-xl font-bold text-gray-900"><?= $artwork->title ?></h1>
-               <span class="text-md text-gray-600"><?= $artwork->description ?></span>
-            </div>
-         </div>
-      <?php endforeach?>
-   </div>
-   <div class="mt-2 flex flex-col justify-center items-center">
-      <?php $paginator->renderPagesNavigation(); ?>
-   </div>
+<div class="ml-20 mr-20 mt-10 flex flex-col items-start h-screen">
+    <div>
+        <h1 class="text-3xl font-bold text-gray-900"><?=$title?></h1>
+    </div>
+    <div class="flex flex-col justify-between items-start">
+        <div class="flex flex-wrap gap-10 mb-8">
+            
+            <?php foreach($artworks as $artwork) : ?>
+                <div class="flex flex-col max-w-xs gap-3 mt-10">
+                    <div class="max-h-[300px] overflow-hidden rounded-2xl shadow-lg">
+                        <img src="/assets<?=$artwork->image_url?>" alt="arte"
+                            class="object-cover rounded-2xl w-full h-full transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl"
+                        />
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900"><?= $artwork->title ?></h1>
+                        <span class="text-md text-gray-600"><?= $artwork->description ?></span>
+                    </div>
+                </div>
+            <?php endforeach?>
+        </div>
+
+        <div class="mt-2 flex flex-col justify-center items-start">
+            <?php $paginator->renderPagesNavigation(); ?>
+        </div>
+    </div>
 </div>
