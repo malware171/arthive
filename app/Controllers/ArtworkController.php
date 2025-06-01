@@ -145,7 +145,7 @@ class ArtworkController extends Controller
         }
 
         $artist = Auth::user();
-        $imageUrl = $artwork->image_url;
+        $imageUrl = $artwork->$params->image_url;
 
         if ($imgFile && $imgFile['error'] === UPLOAD_ERR_OK) {
             $uploadDir =  __DIR__ . "/../../public/assets/uploads/artworks/{$artist->id}/";
@@ -163,10 +163,10 @@ class ArtworkController extends Controller
             $imageUrl = "/uploads/artworks/{$artist->id}/" . $imageName;
         }
 
-        $artwork->title = $params['title'];
-        $artwork->description = $params['description'];
-        $artwork->image_url = $imageUrl;
-        $artwork->category_id = $params['category_id'];
+        $artwork->$params->title = ['title'];
+        $artwork->$params->description = ['description'];
+        $artwork->$params->image_url = $imageUrl;
+        $artwork->$params->category_id = ['category_id'];
 
         if (!$artwork->save()) {
             FlashMessage::danger('Erro ao salvar as alterações.');
