@@ -15,7 +15,7 @@ class ArtworkController extends Controller
     {
         $artist = Auth::user();
 
-        $artworks = Artwork::where(['artist_id' => $artist->id ]);
+        $artworks = Artwork::where(['artist_id' => $artist->id]);
 
         $title = 'Portifólio';
         $subtitle = 'Visualize todos os seus projetos';
@@ -69,17 +69,17 @@ class ArtworkController extends Controller
         $imageUrl = "/uploads/artworks/{$artist->id}/" . $imageName;
 
         $artwork = new Artwork([
-         'title' => $params['title'],
-         'creation_date' => date('Y-m-d'),
-         'description' => $params['description'],
-         'image_url' => $imageUrl,
-         'is_ai_verified' => 0,
-         'artist_id' => $artist->id,
-         'category_id' => $params['category_id']
+            'title' => $params['title'],
+            'creation_date' => date('Y-m-d'),
+            'description' => $params['description'],
+            'image_url' => $imageUrl,
+            'is_ai_verified' => 0,
+            'artist_id' => $artist->id,
+            'category_id' => $params['category_id']
         ]);
 
         if (!$artwork->save()) {
-            FlashMessage::danger('Erro ao salvara imagem');
+            FlashMessage::danger('Erro ao salvar a imagem');
             $this->redirectTo(route('artist.new'));
         } else {
             FlashMessage::success('Imagem salva com sucesso');
