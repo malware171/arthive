@@ -57,7 +57,7 @@ class LoginCest extends BaseAcceptanceCest
         $page->click('Login');
 
         $page->see('Login successful');
-        $page->seeInCurrentUrl('/artist');
+        $page->seeInCurrentUrl('/admin/artworks');
     }
 
     public function testLoginSuccessClientUser(AcceptanceTester $page): void
