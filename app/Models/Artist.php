@@ -11,7 +11,7 @@ use Core\Database\ActiveRecord\Model;
  * @property int $id
  * @property string $bio
  * @property string $portfolio_url
- * @property INT $ai_detection_count
+ * @property int $ai_detection_count
  * @property int $user_id
  */
 
