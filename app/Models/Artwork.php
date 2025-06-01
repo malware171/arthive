@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Core\Database\ActiveRecord\BelongsTo;
 use Core\Database\ActiveRecord\Model;
+use Lib\Validations;
 
 /**
  * @property int $id
@@ -38,5 +39,12 @@ class Artwork extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function validates(): void
+    {
+        Validations::notEmpty('title', $this);
+        Validations::notEmpty('description', $this);
+        Validations::notEmpty('category_id', $this);
     }
 }

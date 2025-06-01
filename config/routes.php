@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin/artworks', [ArtworkController::class, 'index'])->name('artist.admin.page');
 
         //CREATE
-        Route::get('/admin/artworks/new', [ArtworkController::class, 'new'])->name('artist.new');
+        Route::get('/admin/artworks/new', [ArtworkController::class, 'new'])->name('artwork.new');
         Route::post('/admin/artworks/new', [ArtworkController::class, 'create'])->name('artist.create');
 
         //UPDATE

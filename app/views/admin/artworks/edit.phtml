@@ -16,6 +16,12 @@
                     value="<?= $artwork->title?>"
                     require/>
             </div>
+            <?php
+                if ($artwork->errors('title')): ?>
+                <p class="text-red-500 text-sm mt-1">
+                    <?= $artwork->errors('title')?>
+                </p>
+            <?php endif ?>
 
             <div>
                 <div class="relative">
@@ -30,6 +36,12 @@
                     placeholder='Descrição da arte'><?=$artwork->description?></textarea>
                 </div>
             </div>
+            <?php
+            if ($artwork->errors('description')): ?>
+                <p class="text-red-500 text-sm mt-1">
+                    <?= $artwork->errors('description')?>
+                </p>
+            <?php endif ?>
             
             <div class="max-h-[450px] overflow-hidden rounded-2xl shadow-lg">
                 <img id="image_preview" src="/assets<?= $artwork->image_url ?>" alt="arte"
@@ -39,6 +51,12 @@
             <button type="button" id="image_preview_submit" class="mt-2 w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md font-semibold transition" style="display: none;">
                 Confirmar Nova Imagem
             </button>
+            <?php
+                if ($artwork->errors('image_url')): ?>
+                    <p class="text-red-500 text-sm mt-1">
+                        <?= $artwork->errors('image_url')?>
+                    </p>
+            <?php endif ?>
             <div class="flex flex-col">
                 <label for="image_preview_input" class="sr-only" >Selecione uma imagem:</label>
                 <input type="file" id="image_preview_input" name="image" accept="image/*" class="">
@@ -56,6 +74,12 @@
 
                     </select>
                 </div>
+                <?php
+                    if ($artwork->errors('category_id')): ?>
+                        <p class="text-red-500 text-sm mt-1">
+                            <?= $artwork->errors('category_id')?>
+                        </p>
+                <?php endif ?>
             </div>
             <button
                 type="submit"

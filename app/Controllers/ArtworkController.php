@@ -25,29 +25,17 @@ class ArtworkController extends Controller
     {
         $params = $request->getParams();
         $categories = Category::all();
+        $artwork = new Artwork([]);
 
         $title = 'Nova Arte';
         $description = 'Descrição';
-        $this->render('/admin/artworks/new', compact('title', 'description', 'categories'));
+        $this->render('/admin/artworks/new', compact('title', 'description', 'categories', 'artwork'));
     }
 
     public function create(Request $request): void
     {
         $params = $request->getParam('artwork');
         $imgFile = $_FILES['image'];
-
-        if (
-            !is_array($params) ||
-            empty($params['title']) ||
-            empty($params['description']) ||
-            empty($params['category_id']) ||
-            !isset($imgFile) ||
-            $imgFile['error'] !== UPLOAD_ERR_OK
-        ) {
-            FlashMessage::danger('Todos os campos devem ser preechidos');
-            $this->redirectTo(route('artist.new'));
-            return;
-        }
 
         $artist = Auth::user();
 
@@ -62,7 +50,7 @@ class ArtworkController extends Controller
 
         if (!move_uploaded_file($imgFile['tmp_name'], $targetFile)) {
             FlashMessage::danger('Ocorreu um erro ao salvar a imagem.');
-            $this->redirectTo(route('artist.new'));
+            $this->redirectTo(route('artwork.new'));
             return;
         }
 
@@ -79,8 +67,8 @@ class ArtworkController extends Controller
         ]);
 
         if (!$artwork->save()) {
-            FlashMessage::danger('Erro ao salvara imagem');
-            $this->redirectTo(route('artist.new'));
+            FlashMessage::danger('Existem dados incorretos');
+            $this->redirectTo(route('artwork.new'));
         } else {
             FlashMessage::success('Imagem salva com sucesso');
             $this->redirectTo(route('artist.admin.page'));
@@ -138,12 +126,6 @@ class ArtworkController extends Controller
             return;
         }
 
-        if (empty($params['title']) || empty($params['description']) || empty($params['category_id'])) {
-            FlashMessage::danger('Título, descrição e categoria são obrigatórios.');
-            $this->redirectTo(route('artwork.edit', ['id' => $artworkId]));
-            return;
-        }
-
         $artist = Auth::user();
         $imageUrl = $artwork->image_url;
 
@@ -169,7 +151,7 @@ class ArtworkController extends Controller
         $artwork->category_id = $params['category_id'];
 
         if (!$artwork->save()) {
-            FlashMessage::danger('Erro ao salvar as alterações.');
+            FlashMessage::danger('Existem dados incorretos');
             $this->redirectTo(route('artwork.edit', ['id' => $artworkId]));
         } else {
             FlashMessage::success('Obra atualizada com sucesso!');
