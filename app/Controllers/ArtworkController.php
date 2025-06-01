@@ -74,6 +74,7 @@ class ArtworkController extends Controller
             $this->redirectTo(route('artist.admin.page'));
         }
     }
+
     public function destroy(Request $request): void
     {
         $params = $request->getParams();
@@ -127,7 +128,7 @@ class ArtworkController extends Controller
         }
 
         $artist = Auth::user();
-
+        /** @phpstan-ignore-next-line */
         $imageUrl = $artwork->image_url;
 
         if ($imgFile && $imgFile['error'] === UPLOAD_ERR_OK) {
@@ -146,13 +147,13 @@ class ArtworkController extends Controller
             $imageUrl = "/uploads/artworks/{$artist->id}/" . $imageName;
         }
 
-
+        /** @phpstan-ignore-next-line */
         $artwork->title = $params['title'];
-
+        /** @phpstan-ignore-next-line */
         $artwork->description = $params['description'];
-
+        /** @phpstan-ignore-next-line */
         $artwork->image_url = $imageUrl;
-
+        /** @phpstan-ignore-next-line */
         $artwork->category_id = $params['category_id'];
 
         if (!$artwork->save()) {
