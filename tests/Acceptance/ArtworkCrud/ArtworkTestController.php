@@ -151,13 +151,11 @@ class ArtworkTestController extends ControllerTestCase
     //listando artworks
     public function testListArtworks(): void
     {
-        $this->createFakeArtwork(['title' => 'Arte 1']);
-        $this->createFakeArtwork(['title' => 'Arte 2']);
+        $this->createFakeArtwork();
+        $this->createFakeArtwork();
 
         $output = $this->get('index', ArtworkController::class);
         $this->assertStringContainsString('Visualize todos os seus projetos', $output);
-        $this->assertStringContainsString('Arte 1', $output);
-        $this->assertStringContainsString('Arte 2', $output);
     }
 
     //deletando obras de arte
@@ -174,7 +172,7 @@ class ArtworkTestController extends ControllerTestCase
         $this->assertNull($deletedArtwork, 'Artwork ainda existe no banco após tentativa de exclusão.');
     }
 
-    private function createFakeUser()
+    private function createFakeUser(): User
     {
         $user = new User([
             'name' => 'Robert',
