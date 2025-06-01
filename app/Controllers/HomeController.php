@@ -17,6 +17,6 @@ class HomeController extends Controller
         );
 
         $title = 'Todas as obras';
-        $this->render('home/index', compact('title', 'artworks'));
+        $this->render('home/index', compact('title', 'artworks', 'paginator'));
     }
 }
