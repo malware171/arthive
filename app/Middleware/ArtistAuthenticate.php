@@ -19,7 +19,7 @@ class ArtistAuthenticate implements Middleware
         $user = Auth::user();
         if ($user->isClient()) {
             FlashMessage::danger('You do not have permission to access the page as an artist');
-            $this->redirectTo(route('client.index'));
+            $this->redirectTo(route('home.index'));
         }
     }
 

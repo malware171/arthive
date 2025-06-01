@@ -8,16 +8,17 @@ use Core\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
-    public function index(Request $request, int $page = 1): void
+    public function index(Request $request): void
     {
+        $page = (int) $request->getParam('page', 1);
+
         $paginator = Artwork::paginate(
             page: $page,
             per_page: 10,
         );
-        $artworks = $paginator->registers();
 
         $title = 'Todas as obras';
 
-        $this->render('home/index', compact('title', 'paginator', 'artworks'));
+        $this->render('home/index', compact('title', 'paginator'));
     }
 }
