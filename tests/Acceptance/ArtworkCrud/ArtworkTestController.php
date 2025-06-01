@@ -9,6 +9,7 @@ use Lib\Authentication\Auth;
 use Core\Constants\Constants;
 use App\Models\User;
 use App\Models\Artist;
+use App\Models\Artwork;
 use App\Models\Category;
 use Tests\Unit\Controllers\ControllerTestCase;
 
@@ -96,6 +97,62 @@ class ArtworkTestController extends ControllerTestCase
         $this->post('artwork', ArtworkController::class, $params);
         $flash = $_SESSION['flash']['success'] ?? null;
         $this->assertEquals('Imagem salva com sucesso', $flash);
+    }
+
+    //teste de edição com dados incorretos
+    public function testUpdatingWithInvalidData(): void
+    {
+        $artwork = $this->createFakeArtwork();
+
+        $params = [
+            'id' => $artwork->id,
+            'artwork' => [
+                'title' => '',
+                'description' => '',
+                'category_id' => '',
+            ],
+        ];
+
+
+        $this->post('update', ArtworkController::class, $params);
+        $flash = $_SESSION['flash']['danger'] ?? null;
+        $this->assertEquals('Titulo, descrição e categoria são obrigatórios.', $flash);
+    }
+
+    //teste de edição com dados corretos
+    public function testUpdatingWithValidData(): void
+    {
+        $artwork = $this->createFakeArtwork();
+
+        $params = [
+            'id' => $artwork->id,
+            'artwork' => [
+                'title' => 'New title',
+                'description' => 'New description',
+                'category_id' => 1,
+            ],
+        ];
+
+        $this->post('update', ArtworkController::class, $params);
+        $flash = $_SESSION['flash']['success'] ?? null;
+        $this->assertEquals('Obra atualizada com sucesso!', $flash);
+
+        $updatedArtwork = Artwork::findById($artwork->id);
+        $this->assertEquals('New title', $updatedArtwork->title);
+        $this->assertEquals('New description', $updatedArtwork->description);
+        $this->assertEquals(1, $updatedArtwork->category_id);
+    }
+
+    //listando artworks
+    public function testListArtworks(): void
+    {
+        $this->createFakeArtwork(['title' => 'Arte 1']);
+        $this->createFakeArtwork(['title' => 'Arte 2']);
+
+        $output = $this->get('index', ArtworkController::class);
+        $this->assertStringContainsString('Visualize todos os seus projetos', $output);
+        $this->assertStringContainsString('Arte 1', $output);
+        $this->assertStringContainsString('Arte 2', $output);
     }
 
     private function createFakeUser()
