@@ -97,6 +97,11 @@ class ArtworkTestController extends ControllerTestCase
         $this->post('artwork', ArtworkController::class, $params);
         $flash = $_SESSION['flash']['success'] ?? null;
         $this->assertEquals('Imagem salva com sucesso', $flash);
+
+        $savedArtwork = Artwork::findById($artwork->id);
+        $this->assertNotNull($savedArtwork, 'Artwork não foi criada no banco de dados');
+        $this->assertEquals('Artwork description', $savedArtwork->description);
+        $this->assertEquals(1, $savedArtwork->category_id);
     }
 
     //teste de edição com dados incorretos
@@ -153,6 +158,20 @@ class ArtworkTestController extends ControllerTestCase
         $this->assertStringContainsString('Visualize todos os seus projetos', $output);
         $this->assertStringContainsString('Arte 1', $output);
         $this->assertStringContainsString('Arte 2', $output);
+    }
+
+    //deletando obras de arte
+    public function testDeletingArtworks(): void
+    {
+        $artwork = $this->createFakeArtwork();
+
+        $params = ['id' => $artwork->id];
+
+        $this->post('destroy', ArtworkController::class, $params);
+        $flash = $_SESSION['flash']['success'] ?? null;
+        $this->assertEquals('Obra excluida com sucesso', $flash);
+        $deletedArtwork = Artwork::findById($artwork->id);
+        $this->assertNull($deletedArtwork, 'Artwork ainda existe no banco após tentativa de exclusão.');
     }
 
     private function createFakeUser()
