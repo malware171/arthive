@@ -41,21 +41,25 @@
                         <?= $artwork->errors('description')?>
                     </p>
                 <?php endif ?>
-                
-                    <div class="max-h-[450px] overflow-hidden rounded-2xl shadow-lg">
-                        <img id="image_preview" src="/assets/images/defaults/artwork.png" alt="arte"
-                            class="object-cover rounded-2xl w-full h-full transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl cursor-pointer" 
-                            title="Clique para alterar a imagem" />
-                    </div>
-                    <button type="button" id="image_preview_submit" class="mt-2 w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md font-semibold transition" style="display: none;">
-                        Confirmar Nova Imagem
-                    </button>
-                    <?php
-                        if ($artwork->errors('image_url')): ?>
-                            <p class="text-red-500 text-sm mt-1">
-                                <?= $artwork->errors('image_url')?>
-                            </p>
-                    <?php endif ?>
+                <div class="max-h-[450px] overflow-hidden rounded-2xl shadow-lg">
+                    <img 
+                        id="image_preview" 
+                        src="<?= $artwork->image()->path() ?>" 
+                        alt="arte"
+                        class="object-cover rounded-2xl w-full h-full transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl cursor-pointer" 
+                        title="Clique para alterar a imagem" 
+                    />
+                </div>
+                <button type="button" id="image_preview_submit" class="mt-2 w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md font-semibold transition" style="display: none;">
+                    Confirmar
+                </button>
+                <?php
+                    if ($artwork->errors('image_url')): ?>
+                        <p class="text-red-500 text-sm mt-1">
+                            <?= $artwork->errors('image_url')?>
+                        </p>
+                <?php endif ?>
+
                     <div class="flex flex-col">
                         <label for="image_preview_input" class="sr-only" >Selecione uma imagem:</label>
                         <input type="file" id="image_preview_input" name="image" accept="image/*" class="">

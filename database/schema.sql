@@ -37,7 +37,7 @@ CREATE TABLE artworks (
   title VARCHAR(150) NOT NULL,
   creation_date DATE,
   description TEXT,
-  image_url VARCHAR(255) NOT NULL,
+  image_url VARCHAR(255),
   is_ai_verified INT,
   artist_id INT,
   category_id INT,
