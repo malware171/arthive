@@ -1,16 +1,59 @@
 <?php foreach (\Lib\FlashMessage::get() as $type => $msg): ?>
-    <?php
-    $bgColors = [
-        'success' => 'bg-green-100 text-green-800 border-green-300',
-        'danger'   => 'bg-red-100 text-red-800 border-red-300',
-    ];
+    <?php if ($type === 'success') :?> 
+        <div id="flashMessage" class="flash-message flex w-full max-w-md rounded-lg shadow-lg overflow-hidden">
+    
+            <div class="flex items-center justify-center w-16 bg-green-500">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-10 h-10">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+            </div>
 
-    $colorClass = $bgColors[$type] ?? 'bg-gray-100 text-gray-800 border-gray-300';
-    ?>
-    <div class="relative border-l-4 p-4 mb-4 rounded-md shadow-sm <?= $colorClass ?>">
-        <div class="flex justify-between items-start">
-            <div class="pr-4"><?= $msg ?></div>
-            <button onclick="this.parentElement.parentElement.remove()" class="text-xl font-bold leading-none focus:outline-none">&times;</button>
+            <div class="flex flex-1 items-center justify-between p-4 bg-white">
+                <div class="flex-1 mr-4">
+                    <h3 class="font-bold text-gray-800">Sucesso</h3>
+                    <p class="text-sm text-gray-600">
+                        <?= htmlspecialchars($msg)?>
+                    </p>
+                </div>
+                
+                <button onclick="document.getElementById('flashMessage').remove()" class="text-xs font-bold uppercase text-gray-500 hover:text-gray-800 transition-colors">
+                    Close
+                </button>
+            </div>
         </div>
-    </div>
+    <?php elseif($type === 'danger') : ?>
+        <div id="flashMessage" class="flash-message flex w-full max-w-md rounded-lg shadow-lg overflow-hidden">
+    
+            <div class="flex items-center justify-center w-16 bg-red-500">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-10 h-10">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+
+            </div>
+
+            <div class="flex flex-1 items-center justify-between p-4 bg-white">
+                <div class="flex-1 mr-4">
+                    <h3 class="font-bold text-gray-800">Erro</h3>
+                    <p class="text-sm text-gray-600">
+                        <?= htmlspecialchars($msg) ?>
+                    </p>
+                </div>
+                
+                <button onclick="document.getElementById('flashMessage').remove()" class="text-xs font-bold uppercase text-gray-500 hover:text-gray-800 transition-colors">
+                    Close
+                </button>
+            </div>
+        </div>
+        
+    <?php endif; ?>
+
+    <script>
+        setTimeout(() => {
+            const flash = document.getElementById('flashMessage');
+            if (flash) {
+                flash.style.display = 'none';
+            }
+        }, 8000);
+    </script>
+    
 <?php endforeach; ?>

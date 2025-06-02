@@ -20,7 +20,7 @@ class ClientAuthenticate implements Middleware
 
         if ($user->isArtist()) {
             FlashMessage::danger('You do not have permission to access the page as an artist');
-            $this->redirectTo(route('artist.index'));
+            $this->redirectTo(route('artist.admin.page'));
         }
     }
 

@@ -57,7 +57,7 @@ class LoginCest extends BaseAcceptanceCest
         $page->click('Login');
 
         $page->see('Login successful');
-        $page->seeInCurrentUrl('/artist');
+        $page->seeInCurrentUrl('/admin/artworks');
     }
 
     public function testLoginSuccessClientUser(AcceptanceTester $page): void
@@ -84,7 +84,7 @@ class LoginCest extends BaseAcceptanceCest
         $page->click('Login');
 
         $page->see('Login successful');
-        $page->seeInCurrentUrl('/client');
+        $page->seeInCurrentUrl('/home');
     }
 
     public function testLogout(AcceptanceTester $page): void
@@ -110,7 +110,7 @@ class LoginCest extends BaseAcceptanceCest
 
         $page->click('Login');
 
-        $page->seeInCurrentUrl('/client');
+        $page->seeInCurrentUrl('/home');
 
         $page->click('Logout');
         $page->see('Logout successful');

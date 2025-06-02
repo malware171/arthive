@@ -11,6 +11,6 @@ class ClientController extends Controller
     public function index(Request $request): void
     {
         $title = 'Página para clientes';
-        $this->render('client/index', compact('title'));
+        $this->render('home/index', compact('title'));
     }
 }
