@@ -67,6 +67,8 @@ class ArtworkController extends Controller
         $artwork = Artwork::findById((int)$params['id']);
 
         if ($artwork) {
+            $artwork->image()->removeOldImage();
+
             if ($artwork->destroy()) {
                 FlashMessage::success('Obra Excluida com sucesso');
             } else {
@@ -84,7 +86,7 @@ class ArtworkController extends Controller
         $params = $request->getParams();
         $categories = Category::all();
 
-        $artwork = $this->current_user->artist()->artworks()->findById($params['id']);
+        $artwork = Artwork::findById($params['id']);
 
         if ($artwork) {
             $this->render('/admin/artworks/edit', compact('artwork', 'categories'));
@@ -121,5 +123,4 @@ class ArtworkController extends Controller
             $this->redirectTo(route('artist.admin.page'));
         }
     }
-
 }
