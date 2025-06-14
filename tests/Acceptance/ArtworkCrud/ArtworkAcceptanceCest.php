@@ -181,6 +181,6 @@ class ArtworkAcceptanceCest
 
         $I->amOnPage("/artworks/{$foreignArtwork->id}/delete");
         $I->seeInCurrentUrl('/admin/page');
-        $I->see('Obra de Arte não foi encontrada'); // mesma resposta que artwork inexistente
+        $I->see('Obra de Arte não foi encontrada');
     }
 }
