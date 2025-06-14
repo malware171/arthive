@@ -28,7 +28,7 @@ class HomeController extends Controller
     private function randomFolower(): string
     {
         $namesList = [
-        "Carlos", "Ana", "Pedro", "Mariana", "Lucas", "Juliana", "Rafael", 
+        "Carlos", "Ana", "Pedro", "Mariana", "Lucas", "Juliana", "Rafael",
         "Fernanda", "Gabriel", "Beatriz", "Thiago", "Larissa", "Mateus", "Camila"
         ];
 
