@@ -19,6 +19,29 @@ class HomeController extends Controller
 
         $title = 'Todas as obras';
 
-        $this->render('home/index', compact('title', 'paginator'));
+        $friend = $this->randomFolower();
+        $folowers = $this->randomFolowers();
+
+        $this->render('home/index', compact('title', 'paginator', 'friend', 'folowers'));
+    }
+
+    private function randomFolower(): string
+    {
+        $namesList = [
+        "Carlos", "Ana", "Pedro", "Mariana", "Lucas", "Juliana", "Rafael", 
+        "Fernanda", "Gabriel", "Beatriz", "Thiago", "Larissa", "Mateus", "Camila"
+        ];
+
+        $randomIndex = array_rand($namesList);
+
+        $name = $namesList[$randomIndex];
+
+        return "https://api.dicebear.com/8.x/adventurer/svg?seed={$name}";
+    }
+
+    private function randomFolowers(): int
+    {
+        $randomNumber = rand(0, 99);
+        return $randomNumber;
     }
 }
