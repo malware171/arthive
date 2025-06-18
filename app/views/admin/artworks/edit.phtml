@@ -3,6 +3,7 @@
         <div>
             <h1 class="text-3xl font-bold text-gray-900 block mb-1">Edite seu post</h1>
         </div>
+
         <form action="<?= route('artwork.update', ['id' => $artwork->id]) ?>" id="<?= $artwork->id ?>" class="space-y-4" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="_method" value="PUT">
             <div>
@@ -27,6 +28,7 @@
                 <div class="relative">
                     <label for="artwork_description" class="text-md text-bold block mb-1">Descrição</label>
                     <textarea
+
                         id="artwork_description"
                         name="artwork[description]"
                         type="text"
@@ -52,6 +54,7 @@
                 Confirmar Nova Imagem
             </button>
             <?php
+
             if ($artwork->errors('image_url')): ?>
                 <p class="text-red-500 text-sm mt-1">
                     <?= $artwork->errors('image_url') ?>
@@ -66,7 +69,6 @@
                     <label for="category" class=" text-xl font-bold block mb-2 font-medium text-gray-900">Categoria</label>
 
                     <select id="category" name="artwork[category_id]" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 ">
-
                         <option value="">Selecione a categoria</option>
                         <?php foreach ($categories as $category) : ?>
                             <option value="<?= $category->id ?>"><?= $category->name ?></option>
@@ -89,3 +91,4 @@
         </form>
     </div>
 </div>
+
