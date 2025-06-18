@@ -79,7 +79,7 @@ class ArtworkController extends Controller
     {
         $params = $request->getParams();
 
-        $artwork = Artwork::findById((int)$params['id']);
+        $artwork = $this->current_user->artist()->artworks()->findById((int)$params['id']);
 
         if ($artwork) {
             if ($artwork->destroy()) {

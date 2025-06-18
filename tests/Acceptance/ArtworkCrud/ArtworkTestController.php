@@ -197,4 +197,36 @@ class ArtworkTestController extends ControllerTestCase
         $artwork->save();
         return $artwork;
     }
+
+    public function testDeletingArtworkOfAnotherUser(): void
+    {
+        $otherUser = new Artist([
+            'bio' => "I'm another artist",
+            'portfolio_url' => 'https://otherportfolio.com',
+            'ai_detection_count' => 0,
+            'user_id' => $this->createFakeUser()->id,
+        ]);
+        $otherUser->save();
+
+        $artworkOfOtherUser = new Artwork([
+            'title' => 'Other User Artwork',
+            'description' => 'Artwork belonging to another user',
+            'creation_date' => date('Y-m-d'),
+            'image_url' => '/uploads/fake_other.jpg',
+            'is_ai_verified' => 0,
+            'artist_id' => $otherUser->id,
+            'category_id' => 1,
+        ]);
+        $artworkOfOtherUser->save();
+
+        $params = ['id' => $artworkOfOtherUser->id];
+        $response = $this->post('destroy', ArtworkController::class, $params);
+
+
+        $flash = $_SESSION['flash']['danger'] ?? null;
+        $this->assertEquals('Você não tem permissão para excluir essa obra.', $flash);
+
+        $stillExists = Artwork::findById($artworkOfOtherUser->id);
+        $this->assertNotNull($stillExists, 'A obra de outro usuário foi excluída indevidamente.');
+    }
 }

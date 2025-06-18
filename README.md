@@ -34,7 +34,7 @@ $ ./run composer install
 $ docker compose up -d
 ```
 
-ou
+Ou
 
 ```
 $ ./run up -d
