@@ -74,8 +74,6 @@ class ArtworkController extends Controller
             } else {
                 FlashMessage::danger('Erro ao excluir a obra');
             }
-        } else {
-            FlashMessage::danger('Obra de Arte não foi encontrada');
         }
 
         $this->redirectTo(route('artist.admin.page'));
@@ -94,8 +92,6 @@ class ArtworkController extends Controller
             FlashMessage::danger('Arte não foi encontrada');
         }
     }
-
-    // Em App\Controllers\ArtworkController.php
 
     public function update(Request $request): void
     {
