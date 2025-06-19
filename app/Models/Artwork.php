@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\ArtworkImage;
 use Core\Database\ActiveRecord\BelongsTo;
 use Core\Database\ActiveRecord\Model;
 use Lib\Validations;
@@ -46,5 +47,10 @@ class Artwork extends Model
         Validations::notEmpty('title', $this);
         Validations::notEmpty('description', $this);
         Validations::notEmpty('category_id', $this);
+    }
+
+    public function image(): ArtworkImage
+    {
+        return new ArtworkImage($this);
     }
 }
