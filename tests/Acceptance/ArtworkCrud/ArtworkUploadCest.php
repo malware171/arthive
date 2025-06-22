@@ -25,7 +25,8 @@ class ArtworkUploadCest extends BaseAcceptanceCest
         $category = new \App\Models\Category([
             'name' => 'Categoria Teste'
         ]);
-        $category->save();;
+        $category->save();
+        ;
 
         $I->amOnPage('/admin/artworks/new');
         $I->see('Crie seu post');
@@ -52,12 +53,6 @@ class ArtworkUploadCest extends BaseAcceptanceCest
             'name' => 'Categoria Atualizar'
         ]);
         $category->save();
-
-        $uploadDir = codecept_root_dir("public/assets/uploads/artworks/{$artistId}/");
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
-        }
-        copy(codecept_data_dir('test-image.jpg'), $uploadDir . 'test-image.jpg');
 
         // Criar obra com imagem inicial
         $initialArtwork = new \App\Models\Artwork([
