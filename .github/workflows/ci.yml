@@ -30,6 +30,9 @@ jobs:
       - name: Up containers
         run: ./run up -d
 
+      - name: Fix upload directory permissions inside PHP container
+        run: docker exec arthive-php-1 chmod -R 777 /var/www/public/assets/uploads || true
+
       - name: PHPUnit Units test
         run: ./run test tests/Unit
 
