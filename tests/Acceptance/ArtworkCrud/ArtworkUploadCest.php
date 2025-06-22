@@ -44,8 +44,46 @@ class ArtworkUploadCest extends BaseAcceptanceCest
         $I->seeInCurrentUrl('/admin/artworks');
     }
 
+    public function tryUpdateImageWithValidData(AcceptanceTester $I): void
+    {
+        $artistId = $this->loginArtist($I);
 
-    public function loginArtist(AcceptanceTester $page): void
+        // Criar categoria
+        $category = new \App\Models\Category([
+            'name' => 'Categoria Atualizar'
+        ]);
+        $category->save();
+
+        // Criar obra com imagem inicial
+        $initialArtwork = new \App\Models\Artwork([
+            'title' => 'Arte Antiga',
+            'description' => 'Descrição antiga',
+            'creation_date' => date('Y-m-d'),
+            'image_url' => 'artwork.jpg',
+            'is_ai_verified' => 0,
+            'artist_id' => $artistId,
+            'category_id' => $category->id
+        ]);
+        $initialArtwork->save();
+
+        // Acessa página de edição
+        $I->amOnPage('/admin/artworks/' . $initialArtwork->id . '/edit');
+        $I->see('Edite seu post');
+
+
+        // Atualiza campos
+        $I->fillField('artwork[title]', 'Arte Atualizada');
+        $I->fillField('artwork[description]', 'Descrição nova');
+        $I->selectOption('artwork[category_id]', $category->id);
+        $I->attachFile('image', 'test-image-updated.jpg');
+
+        $I->click('Editar post');
+
+        $I->see('Obra atualizada com sucesso!');
+        $I->seeInCurrentUrl('/admin/artworks');
+    }
+
+    public function loginArtist(AcceptanceTester $page): int
     {
         $userArtist = new User([
             'name' => 'User_Artist',
@@ -71,5 +109,7 @@ class ArtworkUploadCest extends BaseAcceptanceCest
 
         $page->see('Login successful');
         $page->seeInCurrentUrl('/admin/artworks');
+
+        return $artist->id;
     }
 }
