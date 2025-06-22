@@ -67,7 +67,6 @@ class ArtworkController extends Controller
         $artwork = Artwork::findById((int)$params['id']);
 
         if ($artwork) {
-
             $artwork->image()->removeOldImage();
 
             if ($artwork->destroy()) {
