@@ -24,14 +24,14 @@ jobs:
       - name: Generate Codeception files
         run: ./run codecept build
 
-      - name: Prepare uploads folder
-        run: |
-          mkdir -p public/assets/uploads
-          sudo chown -R www-data:www-data public/assets/uploads
-          sudo chmod -R 775 public/assets/uploads
+      - name: Setup Uploads assets permissions
+        run: sudo chown -R www-data:www-data public/assets/uploads
 
       - name: Up containers
         run: ./run up -d
+
+        - name: Setup uploads permission inside PHP container
+        run: docker exec arthive-php-1 chown -R www-data:www-data /var/www/public/assets/uploads || true
 
       - name: PHPUnit Units test
         run: ./run test tests/Unit
