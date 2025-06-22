@@ -10,17 +10,16 @@ use App\Models\Artwork;
 
 class ArtworkImage
 {
-   /** @var array<string, mixed> */
+    /** @var array<string, mixed> */
     private array $image;
 
-   /** @param array<string, mixed> $validations */
+    /** @param array<string, mixed> $validations */
     public function __construct(
         private Artwork $model,
         private array $validations = []
-    ) {
-    }
+    ) {}
 
-   // RETORNA A PASTA AONDE ESTA A IMAGEM, SE NAO TIVER RETORNA A IMG DEFAULT
+    // RETORNA A PASTA AONDE ESTA A IMAGEM, SE NAO TIVER RETORNA A IMG DEFAULT
     public function path(): string
     {
         if ($this->model->image_url) {
@@ -30,7 +29,7 @@ class ArtworkImage
 
         return "/assets/images/defaults/artwork.png";
     }
-   /** @param array<string, mixed> $image */
+    /** @param array<string, mixed> $image */
     public function update(array $image): bool
     {
         $this->image = $image;
@@ -41,7 +40,7 @@ class ArtworkImage
 
         if ($this->updateFile()) {
             $this->model->update([
-            'image_url' => $this->getFileName(),
+                'image_url' => $this->getFileName(),
             ]);
 
             return true;
