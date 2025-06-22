@@ -2,7 +2,6 @@
 
 namespace Tests\Acceptance\ArtworkCrud;
 
-
 use Tests\Acceptance\BaseAcceptanceCest;
 use Tests\Support\AcceptanceTester;
 use App\Models\User;
@@ -26,7 +25,8 @@ class ArtworkUploadCest extends BaseAcceptanceCest
         $category = new \App\Models\Category([
             'name' => 'Categoria Teste'
         ]);
-        $category->save();;
+        $category->save();
+        ;
 
         $I->amOnPage('/admin/artworks/new');
         $I->see('Crie seu post');
@@ -81,6 +81,46 @@ class ArtworkUploadCest extends BaseAcceptanceCest
 
         $I->see('Obra atualizada com sucesso!');
         $I->seeInCurrentUrl('/admin/artworks');
+    }
+
+    public function tryDeleteArtworkWithImage(AcceptanceTester $I): void
+    {
+        $artistId = $this->loginArtist($I);
+
+        // Criar categoria
+        $category = new \App\Models\Category([
+            'name' => 'Categoria Deletar'
+        ]);
+        $category->save();
+
+        // Criar artwork com imagem associada
+        $artwork = new \App\Models\Artwork([
+            'title' => 'Arte pra deletar',
+            'description' => 'Imagem que será removida',
+            'creation_date' => date('Y-m-d'),
+            'image_url' => 'artwork.jpg',
+            'is_ai_verified' => 0,
+            'artist_id' => $artistId,
+            'category_id' => $category->id
+        ]);
+        $artwork->save();
+
+        // Copiar a imagem para a pasta simulando upload real
+        $uploadDir = codecept_root_dir("public/assets/uploads/artworks/{$artwork->id}/");
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+        copy(codecept_data_dir('test-image.jpg'), $uploadDir . 'artwork.jpg');
+
+        $I->amOnPage('/admin/artworks');
+        $I->see($artwork->title);
+
+        $I->click("button[data-modal-target='popup-modal-{$artwork->id}']");
+        $I->waitForElementVisible("#popup-modal-{$artwork->id}");
+
+        $I->click("#popup-modal-{$artwork->id} button[type='submit']");
+
+        $I->dontSee($artwork->title);
     }
 
     public function loginArtist(AcceptanceTester $page): int
