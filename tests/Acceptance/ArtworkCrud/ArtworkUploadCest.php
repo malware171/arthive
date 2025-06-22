@@ -44,6 +44,7 @@ class ArtworkUploadCest extends BaseAcceptanceCest
         $I->seeInCurrentUrl('/admin/artworks');
     }
 
+
     public function loginArtist(AcceptanceTester $page): void
     {
         $userArtist = new User([
