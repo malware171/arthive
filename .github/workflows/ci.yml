@@ -27,11 +27,6 @@ jobs:
       - name: Setup Uploads assets permissions
         run: sudo chown -R www-data:www-data public/assets/uploads
 
-      - name: Create upload dir with permissions
-        run: |
-          mkdir -p public/assets/uploads/artworks
-          chmod -R 777 public/assets/uploads
-
       - name: Up containers
         run: ./run up -d
 
