@@ -17,7 +17,8 @@ class ArtworkImage
     public function __construct(
         private Artwork $model,
         private array $validations = []
-    ) {}
+    ) {
+    }
 
     // RETORNA A PASTA AONDE ESTA A IMAGEM, SE NAO TIVER RETORNA A IMG DEFAULT
     public function path(): string

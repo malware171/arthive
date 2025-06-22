@@ -27,6 +27,11 @@ jobs:
       - name: Setup Uploads assets permissions
         run: sudo chown -R www-data:www-data public/assets/uploads
 
+      - name: Ensure upload directory exists and is writable
+        run: |
+          docker exec arthive-php-1 mkdir -p /var/www/public/assets/uploads
+          docker exec arthive-php-1 chmod -R 777 /var/www/public/assets/uploads
+
       - name: Up containers
         run: ./run up -d
 
