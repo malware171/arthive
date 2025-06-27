@@ -71,7 +71,7 @@ class ArtworkController extends Controller
         $artwork = $this->current_user->artist()->artworks()->findById((int)$params['id']);
 
         if ($artwork) {
-            $artwork->image()->removeOldImage();
+            $artwork = Artwork::findById((int)$params['id']);
 
             if ($artwork->destroy()) {
                 FlashMessage::success('Obra Excluida com sucesso');
