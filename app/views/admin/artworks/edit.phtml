@@ -46,7 +46,7 @@
             <?php endif ?>
 
             <div class="max-h-[450px] overflow-hidden rounded-2xl shadow-lg">
-                <img id="image_preview" src="/assets<?= $artwork->image_url ?>" alt="arte"
+                <img id="image_preview" src="<?=$artwork->image()->path()?>" alt="arte"
                     class="object-cover rounded-2xl transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl cursor-pointer"
                     title="Clique para alterar a imagem" />
             </div>
@@ -91,4 +91,3 @@
         </form>
     </div>
 </div>
-
