@@ -51,6 +51,6 @@ class Artwork extends Model
 
     public function image(): ArtworkImage
     {
-        return new ArtworkImage($this);
+        return new ArtworkImage($this, ['extension' => ['png', 'jpg', 'jpeg'], 'size' => 10 * 1024 * 1024 ]);
     }
 }

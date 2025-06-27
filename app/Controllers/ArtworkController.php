@@ -54,6 +54,10 @@ class ArtworkController extends Controller
 
         if ($imageFile && $imageFile['error'] === UPLOAD_ERR_OK) {
             $artwork->image()->update($imageFile);
+        } else {
+            FlashMessage::danger('A imagem é um campo obrigatório. Por favor, selecione um arquivo.');
+            $this->redirectTo(route('artwork.new'));
+            return;
         }
 
         FlashMessage::success('Obra criada com sucesso!');

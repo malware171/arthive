@@ -20,7 +20,6 @@ class ArtworkImage
     ) {
     }
 
-    // RETORNA A PASTA AONDE ESTA A IMAGEM, SE NAO TIVER RETORNA A IMG DEFAULT
     public function path(): string
     {
         if ($this->model->image_url) {
